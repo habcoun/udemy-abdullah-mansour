@@ -4,14 +4,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:structure/shared/bloc-observer.dart';
+import 'package:structure/shared/network/local/cahce_helper.dart';
 import 'package:structure/shared/network/remote/dio_helper.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'layout/news-app/cubit/modetheme cubit/modetheme_cubit.dart';
 import 'layout/news-app/news-layout.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
+  await CacheHelper.init();
   runApp(MyApp());
 }
 
