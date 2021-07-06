@@ -9,10 +9,17 @@ class ModethemeCubit extends Cubit<ModethemeState> {
   ModethemeCubit() : super(ModethemeInitial());
 
   static ModethemeCubit get(context) => BlocProvider.of(context);
-  bool isDark = false;
-  changeMode() {
-    isDark = !isDark;
-    CacheHelper.putData(value: isDark, key: 'isDark')
-        .then((value) => emit(NewsModeChange()));
+  bool isDark = true;
+
+  void changeMode({bool? fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
+      emit(NewsModeChange());
+    } else {
+      isDark = !isDark;
+      CacheHelper.putData(key: 'isDark', value: isDark).then((value) {
+        emit(NewsModeChange());
+      });
+    }
   }
 }

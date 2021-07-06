@@ -8,8 +8,8 @@ class CacheHelper {
   }
 
   static Future<bool> putData({
-    required bool value,
     required String key,
+    required bool value,
   }) async {
     return await sharedPreferences!.setBool(key, value);
   }

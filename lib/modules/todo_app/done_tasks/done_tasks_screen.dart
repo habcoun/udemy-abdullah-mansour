@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:structure/layout/todo_app/cubit/cubit.dart';
+import 'package:structure/layout/todo_app/cubit/states.dart';
 import 'package:structure/shared/components/components.dart';
 
-import 'package:structure/shared/cubit/cubit.dart';
-import 'package:structure/shared/cubit/states.dart';
-
-class ArchivedTasksScreen extends StatelessWidget {
+class DoneTasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var tasks = AppCubit.get(context).archivedtasks;
+        var tasks = AppCubit.get(context).donetasks;
         return ListView.separated(
           itemBuilder: (context, index) => BuildTaskItem(tasks[index]),
           separatorBuilder: (context, index) => Padding(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:structure/layout/todo_app/cubit/cubit.dart';
+import 'package:structure/layout/todo_app/cubit/states.dart';
 import 'package:structure/shared/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:structure/shared/cubit/cubit.dart';
-import 'package:structure/shared/cubit/states.dart';
 
 class HomeLayout extends StatefulWidget {
   @override

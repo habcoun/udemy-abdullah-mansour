@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:structure/modules/business/business-screen.dart';
-import 'package:structure/modules/sciences/sciences-screen.dart';
-import 'package:structure/modules/sports/sports-screen.dart';
+import 'package:structure/modules/news_app/business/business-screen.dart';
+import 'package:structure/modules/news_app/sciences/sciences-screen.dart';
+import 'package:structure/modules/news_app/sports/sports-screen.dart';
 import 'package:structure/shared/network/remote/dio_helper.dart';
 
 part 'newsapp_state.dart';
@@ -16,7 +16,7 @@ class NewsCubit extends Cubit<NewsState> {
   static NewsCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
-
+  List<dynamic> search = [];
   List<dynamic> business = [];
   List<dynamic> sports = [];
   List<dynamic> sciences = [];
@@ -55,7 +55,7 @@ class NewsCubit extends Cubit<NewsState> {
       query: {
         'country': 'eg',
         'category': 'business',
-        'apiKey': '8c4435312c084c168b826c54686121a8',
+        'apiKey': 'cb9ddd41adeb4c268676aa8eba7270a1',
       },
     ).then((value) {
       emit(NewsGetBusinessSuccessState());
@@ -74,7 +74,7 @@ class NewsCubit extends Cubit<NewsState> {
       query: {
         'country': 'eg',
         'category': 'sports',
-        'apiKey': '8c4435312c084c168b826c54686121a8',
+        'apiKey': 'e728c250e3874f54b5b67b2c9c179f6a',
       },
     ).then((value) {
       sports = value.data['articles'];
@@ -94,7 +94,7 @@ class NewsCubit extends Cubit<NewsState> {
       query: {
         'country': 'eg',
         'category': 'science',
-        'apiKey': '8c4435312c084c168b826c54686121a8',
+        'apiKey': 'e728c250e3874f54b5b67b2c9c179f6a',
       },
     ).then((value) {
       sciences = value.data['articles'];
@@ -103,6 +103,25 @@ class NewsCubit extends Cubit<NewsState> {
     }).catchError((e) {
       print('error DioHelper getData ' + e.toString());
       emit(NewsGetSciencesErrorState(e.toString()));
+    });
+  }
+
+  void getSearch(String value) {
+    emit(NewsGetSearchLoadingState());
+
+    DioHelper.getData(
+      url: 'v2/everything',
+      query: {
+        'q': '$value',
+        'apiKey': 'e728c250e3874f54b5b67b2c9c179f6a',
+      },
+    ).then((value) {
+      search = value.data['articles'];
+      print(search.length);
+      emit(NewsGetSearchSuccessState());
+    }).catchError((e) {
+      print('error DioHelper getData ' + e.toString());
+      emit(NewsGetSearchErrorState(e.toString()));
     });
   }
 

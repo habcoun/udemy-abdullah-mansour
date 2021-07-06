@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.dart';
-
-import 'package:structure/shared/cubit/cubit.dart';
+import 'package:structure/layout/todo_app/cubit/cubit.dart';
+import 'package:structure/modules/news_app/web_view/web_view_screen.dart';
 
 class Defaultbotton extends StatelessWidget {
   Defaultbotton(
@@ -57,7 +57,7 @@ class CostumTextFormFeild extends StatelessWidget {
     required this.prefix,
     this.onSubmit,
     this.onChange,
-    this.validate,
+    required this.validate,
     this.onTap,
   });
 
@@ -179,65 +179,79 @@ class BuildArticleItems extends StatelessWidget {
   const BuildArticleItems({required this.articles});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  NewsCubit.get(context).imageDisplay(articles['urlToImage']),
+    return InkWell(
+      onTap: () {
+        navigateTo(
+          context,
+          WebViewScreen(articles['url']),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    NewsCubit.get(context).imageDisplay(articles['urlToImage']),
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 20.0,
-          ),
-          Expanded(
-            child: Container(
-              height: 120.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      articles['title'],
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
-                    ),
-                  ),
-                  Text(
-                    articles['publishedAt'],
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ],
-              ),
+            SizedBox(
+              width: 20.0,
             ),
-          )
-        ],
+            Expanded(
+              child: Container(
+                height: 120.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        articles['title'],
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 4,
+                      ),
+                    ),
+                    Text(
+                      articles['publishedAt'],
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
-class ArticleBuilder extends StatelessWidget {
-  final List list;
-  const ArticleBuilder({required this.list});
+const bool isSearchglob = false;
 
+class ArticleBuilder extends StatelessWidget {
+  ArticleBuilder({
+    required this.list,
+    this.isSearch = false,
+  });
+
+  final bool isSearch;
+  final List list;
   @override
   Widget build(BuildContext context) {
     return Conditional.single(
@@ -253,10 +267,31 @@ class ArticleBuilder extends StatelessWidget {
         );
       },
       fallbackBuilder: (BuildContext context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+        return isSearch
+            ? Container()
+            : Center(
+                child: CircularProgressIndicator(),
+              );
       },
     );
   }
 }
+
+void navigateTo(BuildContext context, Widget screen) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) {
+        return screen;
+      },
+    ),
+  );
+}
+
+void navigateAndFinish(BuildContext context, Widget screen) =>
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return screen;
+      }),
+    );
