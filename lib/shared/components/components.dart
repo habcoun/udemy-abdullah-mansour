@@ -21,7 +21,7 @@ class Defaultbotton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 40.0,
+      height: 50.0,
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(radius),
@@ -49,6 +49,8 @@ class CostumTextFormFeild extends StatelessWidget {
   final dynamic onTap;
   final dynamic validate;
   final dynamic prefix;
+  final dynamic suffix;
+  final dynamic suffixPressed;
 
   CostumTextFormFeild({
     required this.label,
@@ -59,6 +61,8 @@ class CostumTextFormFeild extends StatelessWidget {
     this.onChange,
     required this.validate,
     this.onTap,
+    this.suffixPressed,
+    this.suffix,
   });
 
   @override
@@ -71,7 +75,13 @@ class CostumTextFormFeild extends StatelessWidget {
       onTap: onTap,
       validator: validate,
       decoration: InputDecoration(
-        prefixIcon: Icon(prefix),
+        suffixIcon: Icon(suffix),
+        prefixIcon: GestureDetector(
+          onTap: suffixPressed,
+          child: Icon(
+            prefix,
+          ),
+        ),
         labelText: label,
         border: OutlineInputBorder(),
       ),
