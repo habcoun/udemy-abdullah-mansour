@@ -51,6 +51,7 @@ class CostumTextFormFeild extends StatelessWidget {
   final dynamic prefix;
   final dynamic suffix;
   final dynamic suffixPressed;
+  final bool isPassword;
 
   CostumTextFormFeild({
     required this.label,
@@ -63,6 +64,7 @@ class CostumTextFormFeild extends StatelessWidget {
     this.onTap,
     this.suffixPressed,
     this.suffix,
+    this.isPassword = false,
   });
 
   @override
@@ -74,6 +76,7 @@ class CostumTextFormFeild extends StatelessWidget {
       onChanged: onChange,
       onTap: onTap,
       validator: validate,
+      obscureText: isPassword,
       decoration: InputDecoration(
         suffixIcon: Icon(suffix),
         prefixIcon: GestureDetector(

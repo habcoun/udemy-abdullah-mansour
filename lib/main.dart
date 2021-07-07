@@ -9,8 +9,8 @@ import 'package:structure/layout/shop_app/on_boarding/on_boarding_screen.dart';
 import 'package:structure/shared/network/local/cahce_helper.dart';
 import 'package:structure/shared/network/remote/bloc-observer.dart';
 import 'package:structure/shared/network/remote/dio_helper.dart';
+import 'package:structure/shared/styles/themes.dart';
 
-import 'package:structure/shared/network/styles/themes.dart';
 import 'layout/news-app/cubit/modetheme cubit/modetheme_cubit.dart';
 
 void main() async {
