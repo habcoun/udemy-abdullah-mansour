@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.dart';
 import 'package:structure/layout/todo_app/cubit/cubit.dart';
 import 'package:structure/modules/news_app/web_view/web_view_screen.dart';
@@ -38,6 +39,20 @@ class Defaultbotton extends StatelessWidget {
       ),
     );
   }
+}
+
+void loginToast({
+  required String message,
+  required Color colorBg,
+  required Color colorText,
+}) {
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: colorBg,
+      textColor: colorText,
+      fontSize: 16.0);
 }
 
 class CostumTextFormFeild extends StatelessWidget {

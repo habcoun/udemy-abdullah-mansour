@@ -4,6 +4,7 @@ import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
 import 'package:structure/shared/components/components.dart';
 
 import 'package:structure/shared/components/constants.dart';
+import 'package:structure/shared/network/local/cahce_helper.dart';
 
 class BoardingModel {
   final String image;
@@ -49,10 +50,7 @@ class _OnBoardngScreenState extends State<OnBoardngScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              navigateAndFinish(
-                context,
-                ShopLoginScreen(),
-              );
+              submit(context);
             },
             child: Row(
               children: [
@@ -116,10 +114,7 @@ class _OnBoardngScreenState extends State<OnBoardngScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast != false) {
-                      navigateAndFinish(
-                        context,
-                        ShopLoginScreen(),
-                      );
+                      submit(context);
                     } else {
                       boardController.nextPage(
                         duration: Duration(
@@ -179,4 +174,15 @@ class BuildBoardingItems extends StatelessWidget {
       ],
     );
   }
+}
+
+void submit(context) {
+  CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
+    if (value) {
+      navigateAndFinish(
+        context,
+        ShopLoginScreen(),
+      );
+    }
+  });
 }

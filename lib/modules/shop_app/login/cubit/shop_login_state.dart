@@ -7,7 +7,11 @@ class ShopLoginInitial extends ShopLoginState {}
 
 class ShopLoginLoading extends ShopLoginState {}
 
-class ShopLoginSucess extends ShopLoginState {}
+class ShopLoginSucess extends ShopLoginState {
+  final ShopLoginModel loginModel;
+
+  ShopLoginSucess(this.loginModel);
+}
 
 class ShopLoginError extends ShopLoginState {
   final String error;

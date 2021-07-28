@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:structure/models/shop-app/login-model.dart';
 import 'package:structure/shared/network/end_point.dart';
 import 'package:structure/shared/network/remote/dio_helper.dart';
 part 'shop_login_state.dart';
@@ -12,8 +13,8 @@ class ShopLoginCubit extends Cubit<ShopLoginState> {
 
   static ShopLoginCubit get(context) => BlocProvider.of(context);
   IconData suffix = Icons.visibility_outlined;
-  bool isPasswordShow = true;
-
+  bool isPasswordShow = false;
+  late ShopLoginModel loginModel;
   void changePasswordVisibility() {
     print('Pressed');
     isPasswordShow = !isPasswordShow;
@@ -35,10 +36,12 @@ class ShopLoginCubit extends Cubit<ShopLoginState> {
         'password': password,
       },
     ).then((value) {
-      print(value.data);
-      emit(ShopLoginSucess());
+      loginModel = ShopLoginModel.fromJson(value.data);
+
+      emit(ShopLoginSucess(loginModel));
     }).catchError((e) {
       print(e.toString());
+      print(loginModel);
       emit(ShopLoginError(e.toString()));
     });
   }

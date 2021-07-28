@@ -16,7 +16,24 @@ class ShopLoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit, ShopLoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ShopLoginSucess) {
+            if (state.loginModel.status == true) {
+              loginToast(
+                message: state.loginModel.message.toString(),
+                colorBg: Colors.green,
+                colorText: Colors.green,
+              );
+              print(state.loginModel.message);
+            } else {
+              loginToast(
+                message: state.loginModel.message.toString(),
+                colorBg: Colors.red,
+                colorText: Colors.white,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(),
