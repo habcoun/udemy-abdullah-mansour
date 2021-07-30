@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.dart';
 
 import 'package:structure/layout/shop_app/on_boarding/on_boarding_screen.dart';
+import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
 
 import 'package:structure/shared/network/local/cahce_helper.dart';
 import 'package:structure/shared/network/remote/bloc-observer.dart';
@@ -20,12 +21,21 @@ void main() async {
   await CacheHelper.init();
   bool? isDark = CacheHelper.getData(key: 'isDark');
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
-  runApp(MyApp(isDark));
+  runApp(
+    MyApp(
+      isDark: isDark,
+      onBoarding: onBoarding,
+    ),
+  );
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  final bool? isDark;
-  MyApp(this.isDark);
+  bool? isDark, onBoarding;
+  MyApp({
+    this.onBoarding,
+    this.isDark,
+  });
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -52,7 +62,7 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: OnBoardngScreen(),
+            home: (onBoarding == true) ? ShopLoginScreen() : OnBoardngScreen(),
           );
         },
       ),
