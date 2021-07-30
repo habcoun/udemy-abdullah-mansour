@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
+import 'package:structure/layout/shop_app/shop-layout.dart';
 import 'package:structure/modules/shop_app/login/cubit/shop_login_cubit.dart';
 import 'package:structure/modules/shop_app/register/shop_register_screen.dart';
 import 'package:structure/shared/components/components.dart';
 import 'package:structure/shared/components/constants.dart';
+import 'package:structure/shared/network/local/cahce_helper.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();
@@ -19,16 +21,21 @@ class ShopLoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is ShopLoginSucess) {
             if (state.loginModel.status == true) {
-              loginToast(
-                message: state.loginModel.message.toString(),
-                colorBg: Colors.green,
-                colorText: Colors.green,
-              );
+              CacheHelper.saveData(
+                key: 'token',
+                value: state.loginModel.data!.token,
+              ).then((value) {
+                navigateAndFinish(
+                  context,
+                  ShopLayout(),
+                );
+              });
+
               print(state.loginModel.message);
             } else {
-              loginToast(
+              showToast(
                 message: state.loginModel.message.toString(),
-                colorBg: Colors.red,
+                state: ToastState.ERROR,
                 colorText: Colors.white,
               );
             }

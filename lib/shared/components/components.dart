@@ -41,18 +41,37 @@ class Defaultbotton extends StatelessWidget {
   }
 }
 
-void loginToast({
+void showToast({
   required String message,
-  required Color colorBg,
+  required ToastState state,
   required Color colorText,
 }) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: colorBg,
+      backgroundColor: chooseToastColor(state),
       textColor: colorText,
       fontSize: 16.0);
+}
+
+enum ToastState { SUCCESS, ERROR, WARRING }
+
+Color chooseToastColor(ToastState state) {
+  Color color;
+
+  switch (state) {
+    case ToastState.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToastState.ERROR:
+      color = Colors.red;
+      break;
+    case ToastState.WARRING:
+      color = Colors.blue;
+      break;
+  }
+  return color;
 }
 
 class CostumTextFormFeild extends StatelessWidget {

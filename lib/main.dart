@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.dart';
 
 import 'package:structure/layout/shop_app/on_boarding/on_boarding_screen.dart';
+import 'package:structure/layout/shop_app/shop-layout.dart';
 import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
 
 import 'package:structure/shared/network/local/cahce_helper.dart';
@@ -21,20 +22,34 @@ void main() async {
   await CacheHelper.init();
   bool? isDark = CacheHelper.getData(key: 'isDark');
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  String? token = CacheHelper.sharedPreferences!.getString('token');
+  Widget widget;
+
+  if (onBoarding != null) {
+    if (token != null) {
+      widget = ShopLayout();
+    } else {
+      widget = ShopLoginScreen();
+    }
+  } else {
+    widget = OnBoardngScreen();
+  }
+
   runApp(
     MyApp(
       isDark: isDark,
-      onBoarding: onBoarding,
+      startWidget: widget,
     ),
   );
 }
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  bool? isDark, onBoarding;
+  bool? isDark;
+  Widget startWidget;
   MyApp({
-    this.onBoarding,
     this.isDark,
+    required this.startWidget,
   });
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -62,7 +77,7 @@ class MyApp extends StatelessWidget {
                 ? ThemeMode.dark
                 : ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: (onBoarding == true) ? ShopLoginScreen() : OnBoardngScreen(),
+            home: startWidget,
           );
         },
       ),
