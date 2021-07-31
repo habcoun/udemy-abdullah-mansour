@@ -1,19 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.dart';
-
-import 'package:structure/layout/shop_app/on_boarding/on_boarding_screen.dart';
+import 'package:structure/layout/shop_app/cubit/shop_cubit.dart';
 import 'package:structure/layout/shop_app/shop-layout.dart';
 import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
-
 import 'package:structure/shared/network/local/cahce_helper.dart';
 import 'package:structure/shared/network/remote/bloc-observer.dart';
 import 'package:structure/shared/network/remote/dio_helper.dart';
 import 'package:structure/shared/styles/themes.dart';
-
 import 'layout/news-app/cubit/modetheme cubit/modetheme_cubit.dart';
+import 'modules/shop_app/on_boarding/on_boarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +51,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => ShopCubit()..getHomeData(),
+        ),
         BlocProvider(
           create: (context) => NewsCubit()
             ..getBusiness()

@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   webview_flutter: ^2.0.9
   fluttertoast: ^8.0.7
+  bottom_navy_bar: ^6.0.0
+  carousel_slider: ^4.0.0
 
   
 
