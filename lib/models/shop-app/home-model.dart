@@ -1,15 +1,15 @@
 class HomeModel {
   bool? status;
 
-  DataModel? data;
+  DataHomeModel? data;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null ? new DataModel.fromJson(json['data']) : null;
+    data = json['data'] != null ? DataHomeModel.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['status'] = this.status;
 
     if (this.data != null) {
@@ -19,29 +19,29 @@ class HomeModel {
   }
 }
 
-class DataModel {
+class DataHomeModel {
   List<BannersModel> banners = [];
   List<ProductsModel> products = [];
   String? ad;
 
-  DataModel.fromJson(Map<String, dynamic> json) {
+  DataHomeModel.fromJson(Map<String, dynamic> json) {
     if (json['banners'] != null) {
       banners = <BannersModel>[];
       json['banners'].forEach((v) {
-        banners.add(new BannersModel.fromJson(v));
+        banners.add(BannersModel.fromJson(v));
       });
     }
     if (json['products'] != null) {
       products = <ProductsModel>[];
       json['products'].forEach((v) {
-        products.add(new ProductsModel.fromJson(v));
+        products.add(ProductsModel.fromJson(v));
       });
     }
     ad = json['ad'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
 
     data['banners'] = this.banners.map((v) => v.toJson()).toList();
 
@@ -55,20 +55,18 @@ class DataModel {
 class BannersModel {
   int? id;
   String? image;
-  CategoryModel? category;
-
-  BannersModel({this.id, this.image, this.category});
+  CategoryHomeModel? category;
 
   BannersModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
     category = json['category'] != null
-        ? new CategoryModel.fromJson(json['category'])
+        ? CategoryHomeModel.fromJson(json['category'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['image'] = this.image;
     if (this.category != null) {
@@ -79,19 +77,19 @@ class BannersModel {
   }
 }
 
-class CategoryModel {
+class CategoryHomeModel {
   int? id;
   String? image;
   String? name;
 
-  CategoryModel.fromJson(Map<String, dynamic> json) {
+  CategoryHomeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
     name = json['name'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['image'] = this.image;
     data['name'] = this.name;
@@ -121,7 +119,7 @@ class ProductsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['price'] = this.price;
     data['old_price'] = this.oldPrice;

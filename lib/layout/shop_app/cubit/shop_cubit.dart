@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:structure/models/shop-app/categories_model.dart';
 import 'package:structure/models/shop-app/home-model.dart';
 import 'package:structure/modules/shop_app/categories/categories-screen.dart';
 import 'package:structure/modules/shop_app/favorites/favorites-screen.dart';
@@ -38,12 +39,26 @@ class ShopCubit extends Cubit<ShopState> {
       token: token,
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
-      printFullText(homeModel!.data!.banners[0].image.toString());
-      printFullText(homeModel!.status.toString());
+
       emit(ShopSuccessHomeDataState());
     }).catchError((error) {
       printFullText(error.toString());
       emit(ShopErrorHomeDataState());
+    });
+  }
+
+  CategoriesModel? categorieModel;
+  void getCategoriesData() {
+    DioHelper.getData(
+      url: GET_CATEGORIES,
+      token: token,
+    ).then((value) {
+      categorieModel = CategoriesModel.fromJson(value.data);
+
+      emit(ShopSuccessCategoriesState());
+    }).catchError((error) {
+      printFullText(error.toString());
+      emit(ShopErrorCategoriesState());
     });
   }
 }
