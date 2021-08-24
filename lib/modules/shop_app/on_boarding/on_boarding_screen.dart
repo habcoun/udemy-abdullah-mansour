@@ -4,7 +4,7 @@ import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
 import 'package:structure/shared/components/components.dart';
 
 import 'package:structure/shared/components/constants.dart';
-import 'package:structure/shared/network/local/cahce_helper.dart';
+import 'package:structure/shared/services/local/cahce_helper.dart';
 
 class BoardingModel {
   final String image;

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:structure/models/shop-app/login-model.dart';
-import 'package:structure/shared/network/end_point.dart';
-import 'package:structure/shared/network/remote/dio_helper.dart';
+import 'package:structure/shared/services/end_point.dart';
+import 'package:structure/shared/services/remote/dio_helper.dart';
 part 'shop_login_state.dart';
 
 class ShopLoginCubit extends Cubit<ShopLoginState> {

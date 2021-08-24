@@ -6,7 +6,7 @@ import 'package:structure/modules/shop_app/login/cubit/shop_login_cubit.dart';
 import 'package:structure/modules/shop_app/register/shop_register_screen.dart';
 import 'package:structure/shared/components/components.dart';
 import 'package:structure/shared/components/constants.dart';
-import 'package:structure/shared/network/local/cahce_helper.dart';
+import 'package:structure/shared/services/local/cahce_helper.dart';
 
 var emailController = TextEditingController();
 var passwordController = TextEditingController();

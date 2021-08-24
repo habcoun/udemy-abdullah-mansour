@@ -9,8 +9,8 @@ import 'package:structure/modules/shop_app/favorites/favorites-screen.dart';
 import 'package:structure/modules/shop_app/products/products-screen.dart';
 import 'package:structure/modules/shop_app/settings/settings-screen.dart';
 import 'package:structure/shared/components/constants.dart';
-import 'package:structure/shared/network/end_point.dart';
-import 'package:structure/shared/network/remote/dio_helper.dart';
+import 'package:structure/shared/services/end_point.dart';
+import 'package:structure/shared/services/remote/dio_helper.dart';
 
 part 'shop_state.dart';
 

@@ -5,9 +5,9 @@ import 'package:structure/layout/news-app/cubit/newsapp%20cubit/newsapp_cubit.da
 import 'package:structure/layout/shop_app/cubit/shop_cubit.dart';
 import 'package:structure/layout/shop_app/shop-layout.dart';
 import 'package:structure/modules/shop_app/login/shop_login_screen.dart';
-import 'package:structure/shared/network/local/cahce_helper.dart';
-import 'package:structure/shared/network/remote/bloc-observer.dart';
-import 'package:structure/shared/network/remote/dio_helper.dart';
+import 'package:structure/shared/services/local/cahce_helper.dart';
+import 'package:structure/shared/services/remote/bloc-observer.dart';
+import 'package:structure/shared/services/remote/dio_helper.dart';
 import 'package:structure/shared/styles/themes.dart';
 import 'layout/news-app/cubit/modetheme cubit/modetheme_cubit.dart';
 import 'modules/shop_app/on_boarding/on_boarding_screen.dart';

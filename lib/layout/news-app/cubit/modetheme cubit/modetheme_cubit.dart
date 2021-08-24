@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:structure/shared/network/local/cahce_helper.dart';
+import 'package:structure/shared/services/local/cahce_helper.dart';
 
 part 'modetheme_state.dart';
 

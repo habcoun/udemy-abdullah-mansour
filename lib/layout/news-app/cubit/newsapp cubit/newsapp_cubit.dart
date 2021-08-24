@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:structure/modules/news_app/business/business-screen.dart';
 import 'package:structure/modules/news_app/sciences/sciences-screen.dart';
 import 'package:structure/modules/news_app/sports/sports-screen.dart';
-import 'package:structure/shared/network/remote/dio_helper.dart';
+import 'package:structure/shared/services/remote/dio_helper.dart';
 
 part 'newsapp_state.dart';
 
